@@ -1,11 +1,16 @@
-<dialog class="modal">
+<dialog class="modal" [open]="open">
+    <button class="close-btn" (click)="close()">X</button>
     <h1>Login</h1>
     <form>
-        <label for="email">E-mail</label>
-        <input type="email" name="email" id="email" placeholder="Digite seu e-mail" required>
-        <label for="senha">Senha</label>
-        <input type="password" name="senha" id="senha" placeholder="Digite sua senha" required>
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" name="email" id="email" placeholder="Digite seu e-mail" required>
+        </div>
+        <div class="form-group">
+            <label for="senha">Senha</label>
+            <input type="password" name="senha" id="senha" placeholder="Digite sua senha" required>
+        </div>
         <button type="submit">Entrar</button>
     </form>
-    <p>Não tem uma conta? <a>Cadastre-se</a></p>
+    <p>Não tem uma conta? <a (click)="cadastrar()">Cadastre-se</a></p>
 </dialog>

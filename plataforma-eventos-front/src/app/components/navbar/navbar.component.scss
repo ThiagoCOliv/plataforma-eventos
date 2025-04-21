@@ -10,7 +10,7 @@ nav{
         gap: 3rem;
         
         & img{
-            width: 20%;
+            width: clamp(100px, 15%, 400px);
             object-fit: contain;
 
             &:hover{
@@ -40,8 +40,7 @@ nav{
     }
 
     & button{
-        background-color: var(--main-color-dark);
-        color: white;
+        background: var(--main-color-dark);
         border: none;
         padding: 0.5rem 1rem;
         border-radius: 5px;

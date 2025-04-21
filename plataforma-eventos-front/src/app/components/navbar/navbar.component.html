@@ -9,4 +9,5 @@
     </div>
     <button (click)="abrirModal('login')">Login</button>
 </nav>
-<app-login [open]="dialogsOpen.login"></app-login>
+<app-login [open]="dialogsOpen.login" (closeModal)="fecharModal('login')" (abrirModalCadastro)="abrirModal('cadastro')"></app-login>
+<app-cadastrar-user [open]="dialogsOpen.cadastro" (cancelar)="abrirModal('login')" (cadastroRealizado)="abrirModal('cadastroMessage')"></app-cadastrar-user>

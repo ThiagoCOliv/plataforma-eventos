@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, output } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -9,4 +9,16 @@ import { Component, Input } from '@angular/core';
 })
 export class LoginComponent {
   @Input() open: boolean = false;
+  closeModal = output();
+  abrirModalCadastro = output();
+
+  close() 
+  {
+    this.closeModal.emit();
+  }
+
+  cadastrar()
+  {
+    this.abrirModalCadastro.emit();
+  }
 }

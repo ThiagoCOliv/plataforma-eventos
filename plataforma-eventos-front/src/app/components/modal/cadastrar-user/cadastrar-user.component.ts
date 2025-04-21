@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, output } from '@angular/core';
 
 @Component({
   selector: 'app-cadastrar-user',
@@ -7,6 +7,14 @@ import { Component } from '@angular/core';
   templateUrl: './cadastrar-user.component.html',
   styleUrl: './cadastrar-user.component.scss'
 })
-export class CadastrarUserComponent {
 
+export class CadastrarUserComponent 
+{
+  @Input() open: boolean = false;
+  cancelar = output();
+
+  close() 
+  {
+    this.cancelar.emit();
+  }
 }
