@@ -1,0 +1,149 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Plataforma-eventos",
+    "description": "API para a plataforma de eventos Synera"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/users/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "description": "",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "ref": "./api/models/userModel.js"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "user": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Jhon Doe"
+          },
+          "email": {
+            "type": "string",
+            "example": "jhondoe@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "password123"
+          },
+          "confirmPassword": {
+            "type": "string",
+            "example": "password123"
+          }
+        }
+      },
+      "UserCreationResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "User created successfully"
+          },
+          "status": {
+            "type": "number",
+            "example": 201
+          },
+          "userCreated": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number",
+                "example": 1
+              },
+              "name": {
+                "type": "string",
+                "example": "Jhon Doe"
+              },
+              "email": {
+                "type": "string",
+                "example": "jhondoe@gmail.com"
+              },
+              "password": {
+                "type": "string",
+                "example": "password123"
+              },
+              "status": {
+                "type": "string",
+                "example": "pending"
+              },
+              "createdAt": {
+                "type": "string",
+                "example": "2023-10-01T00:00:00.000Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "example": "2023-10-01T00:00:00.000Z"
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
