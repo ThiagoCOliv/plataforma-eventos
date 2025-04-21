@@ -1,4 +1,16 @@
-.container{
-    max-width: 1200px;
-    margin: 1rem auto;
+.home {
+    width: 100%;
+    min-height: 100vh;
+    background-image: url('/images/background-home.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-top: 1rem;
+
+    & .container {
+        max-width: 1200px;
+        margin: 1rem auto;
+        border-radius: 5rem;
+        background: #0004;
+    }
 }
