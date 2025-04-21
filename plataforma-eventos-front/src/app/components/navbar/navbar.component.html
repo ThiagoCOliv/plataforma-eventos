@@ -7,5 +7,6 @@
             <li><a routerLink="/sobre">Sobre</a></li>
         </ul>
     </div>
-    <button>Login</button>
+    <button (click)="abrirModal('login')">Login</button>
 </nav>
+<app-login [open]="dialogsOpen.login"></app-login>
