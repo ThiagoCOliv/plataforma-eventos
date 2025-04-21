@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    color-scheme: dark;
+}
+
+:root {
+    --main-color: #8E4DFF;
+    --main-color-light: #A36CFF;
+    --main-color-dark: #7A36FF;
+}
