@@ -8,7 +8,6 @@ import { Component, Input, output } from '@angular/core';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  @Input() open: boolean = false;
   closeModal = output();
   abrirModalCadastro = output();
 

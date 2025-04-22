@@ -1,1 +1,11 @@
-<p>cadastrar-user-mensagem works!</p>
+<dialog class="modal" [open]="true">
+    <img src="images/Logo-Icon.png" alt="Synera logo icon" class="logo"/>
+    <h1>Verifique seu e-mail</h1>
+    <p>
+        Enviamos um e-mail para <strong>{{ emailCadastrado }}</strong> com um link de confirmação.
+    </p>
+    <p>
+        Clique no link para confirmar seu cadastro e acessar sua conta.
+    </p>
+    <button class="confirmar-btn" (click)="fecharModal()">OK</button>
+</dialog>

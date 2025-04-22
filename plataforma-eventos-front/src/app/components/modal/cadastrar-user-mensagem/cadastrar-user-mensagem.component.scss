@@ -1,0 +1,42 @@
+dialog {
+    width: clamp(300px, 50vw, 600px);
+    margin: auto;
+    border: 1px solid #1E1F2B;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 0 0 99em rgba(0, 0, 0, 0.5);
+    background: #0F111A;
+    position: relative;
+
+    & .logo {
+        width: 20%;
+        margin: 0 40%;
+    }
+
+    & h1 {
+        font-size: 2rem;
+        text-align: center;
+        margin: 1rem 0;
+    }
+
+    & p {
+        font-size: 1.25rem;
+        margin: 1rem 0;
+    }
+
+    & button {
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        font-size: 1.25rem;
+        width: 100%;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        border: none;
+        background: var(--main-color-dark);
+
+        &:hover, &:focus {
+            outline: none;
+            filter: drop-shadow(0 0 4px var(--main-color-light));
+        }
+    }
+}
