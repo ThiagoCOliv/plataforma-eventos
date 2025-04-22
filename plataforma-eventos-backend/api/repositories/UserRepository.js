@@ -4,7 +4,7 @@ class UserRepository
 {
     async create(userData)
     {
-        return UserModel.create({
+        return await UserModel.create({
             name: userData.name,
             email: userData.email,
             password: userData.password

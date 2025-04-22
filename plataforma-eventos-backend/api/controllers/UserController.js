@@ -7,10 +7,21 @@ const createUser = async (req, res) => {
         const userData = req.body;
         
         const canCreateUser = UserValidator.validateCreate(userData);
-        if (canCreateUser.error) return res.status(400).json(canCreateUser.error);
+        if (!canCreateUser.success) return res.status(400).json({
+                error: 'Validation failed',
+                details: canCreateUser.errors
+            });
         
-        const userCreated = await UserService.createUser(userData);
-        return res.status(201).json(userCreated);
+        const { user } = await UserService.createUser(userData);
+        
+        return res.status(201).json({ 
+            id: user.id,
+            name: user.name, 
+            email: user.email, 
+            status: user.status, 
+            createdAt: user.createdAt, 
+            updatedAt: user.updatedAt 
+        });
     } 
     catch (error)
     {
