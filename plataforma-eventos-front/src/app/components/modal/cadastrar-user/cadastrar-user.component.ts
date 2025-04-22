@@ -1,5 +1,6 @@
-import { Component, Input, output } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, output } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-cadastrar-user',
@@ -11,14 +12,16 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 export class CadastrarUserComponent 
 {
+  constructor(private readonly service: UserService) { }
+
   cancelar = output();
 
   profileForm = new FormGroup({
-    name: new FormControl(''),
-    email: new FormControl(''),
-    password: new FormControl(''),
-    passwordConfirm: new FormControl('')
-  })
+    name: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    confirmPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
+  });
 
   close() 
   {
@@ -29,8 +32,7 @@ export class CadastrarUserComponent
 
   onSubmit() 
   {
-    let email = 'email@gmail.com';
-    console.log(email);
-    this.cadastroRealizado.emit(email);
+    console.log(this.profileForm.value);
+    this.cadastroRealizado.emit("email");
   }
 }
