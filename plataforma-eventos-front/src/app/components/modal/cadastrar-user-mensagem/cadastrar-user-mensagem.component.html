@@ -2,10 +2,16 @@
     <img src="images/Logo-Icon.png" alt="Synera logo icon" class="logo"/>
     <h1>Verifique seu e-mail</h1>
     <p>
-        Enviamos um e-mail para <strong>{{ emailCadastrado }}</strong> com um link de confirmação.
+        Enviamos um e-mail para <strong>{{ emailCadastrado }}</strong> com um número para confirmação da conta.
     </p>
-    <p>
-        Clique no link para confirmar seu cadastro e acessar sua conta.
-    </p>
-    <button class="confirmar-btn" (click)="fecharModal()">OK</button>
+    <form (ngSubmit)="onSubmit()" [formGroup]="validationForm">
+        <div class="form-group">
+            <label for="number">Número para confirmação</label>
+            <input type="number" formControlName="number" id="number" placeholder="Digite o número" required>
+        </div>
+        <div class="buttons">
+            <button class="close-btn" (click)="fecharModal()">Cancelar</button>
+            <button class="submit-btn" type="submit" [disabled]="!validationForm.valid">Enviar</button>
+        </div>
+    </form>
 </dialog>

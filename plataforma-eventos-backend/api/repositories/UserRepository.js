@@ -1,4 +1,5 @@
 const UserModel = require("../models/UserModel");
+const generateRandomNumber = require("../../utils/generate-random-number");
 
 class UserRepository
 {
@@ -7,7 +8,8 @@ class UserRepository
         return await UserModel.create({
             name: userData.name,
             email: userData.email,
-            password: userData.password
+            password: userData.password,
+            validationNumber: generateRandomNumber(8)
         });
     }
 

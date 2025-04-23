@@ -35,6 +35,10 @@ const User = sequelize.define('Users',
         status: {
             type: DataTypes.ENUM('active', 'inactive', 'pending'),
             defaultValue: 'pending'
+        },
+        validationNumber: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
     }
 );
@@ -43,8 +47,7 @@ User.beforeCreate(async (user) => user.password = await bcrypt.hash(user.passwor
 User.prototype.checkPassword = (pass) => bcrypt.compare(pass, this.password);
 
 (async () => {
-    await User.sync();
-    
+    await User.sync();    
 })();
 
 module.exports = User;

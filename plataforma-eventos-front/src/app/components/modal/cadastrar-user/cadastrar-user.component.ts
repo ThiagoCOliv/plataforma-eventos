@@ -1,6 +1,8 @@
 import { Component, output } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
+import { User } from '../../../interfaces/User.interface';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cadastrar-user',
@@ -15,6 +17,7 @@ export class CadastrarUserComponent
   constructor(private readonly service: UserService) { }
 
   cancelar = output();
+  private httpSubscription?: Subscription;
 
   profileForm = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -32,7 +35,27 @@ export class CadastrarUserComponent
 
   onSubmit() 
   {
-    console.log(this.profileForm.value);
-    this.cadastroRealizado.emit("email");
+    if(this.profileForm.value.password !== this.profileForm.value.confirmPassword) 
+    {
+      alert("As senhas não coincidem.");
+      return;
+    }
+    
+    this.httpSubscription = this.service.postUser(this.profileForm.value as User).subscribe(res => {
+      if(res.status === 201)
+      {
+        this.profileForm.reset();
+        this.cadastroRealizado.emit(res.body!.email as string);
+      }
+      else
+      {
+        console.error("Erro ao cadastrar usuário:", res);
+      }
+    });
+  }
+
+  ngOnDestroy(): void
+  {
+    this.httpSubscription?.unsubscribe();
   }
 }

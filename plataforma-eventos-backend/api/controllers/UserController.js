@@ -1,5 +1,6 @@
 const UserService = require('../services/UserService');
 const UserValidator = require('../validators/UserValidator');
+const EmailService = require('../services/EmailService');
 
 const createUser = async (req, res) => {
     try 
@@ -13,6 +14,7 @@ const createUser = async (req, res) => {
             });
         
         const { user } = await UserService.createUser(userData);
+        if (!EmailService.sendEmail(user)) throw new Error('Failed to send email');
         
         return res.status(201).json({ 
             id: user.id,
