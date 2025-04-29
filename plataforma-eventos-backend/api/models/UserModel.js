@@ -39,6 +39,10 @@ const User = sequelize.define('Users',
         validationNumber: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        loginToken: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
     }
 );

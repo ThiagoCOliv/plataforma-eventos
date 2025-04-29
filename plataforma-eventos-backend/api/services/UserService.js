@@ -23,7 +23,8 @@ async function validateAccount(email, number)
         const userCheck = await userRepository.checkUser(email);
         if (!userCheck) throw new Error('User not found');
         
-        if (userCheck.validationNumber !== number) throw new Error('Invalid validation number');
+        if (userCheck.validationNumber !== number.toString()) throw new Error('Invalid validation number');
+        if(userCheck.status === 'active') throw new Error('Account already validated');
 
         const userValidated = await userRepository.validateAccount(email, number);
         if (!userValidated) throw new Error('Failed to validate account');

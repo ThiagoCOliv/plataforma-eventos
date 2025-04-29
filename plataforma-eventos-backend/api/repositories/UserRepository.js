@@ -25,8 +25,8 @@ class UserRepository
 
     async validateAccount(email, number)
     {
-        return await UserModel.update({ validationNumber: number.toString() }, {
-            where: { email }
+        return await UserModel.update({ status: 'active' }, {
+            where: { email, validationNumber: number.toString() },
         });
     }
 }

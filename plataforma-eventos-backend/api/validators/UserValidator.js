@@ -11,7 +11,7 @@ const validateCreate = (userData) => {
     return { success: true };
 };
 
-const validateAccount = async (email, number) => {
+const validateAccount = (email, number) => {
     const validationResult = validateInfo(email, number);
 
     if (validationResult.error) return {

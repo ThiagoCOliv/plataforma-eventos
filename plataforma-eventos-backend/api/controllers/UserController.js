@@ -5,7 +5,8 @@ const EmailService = require('../services/EmailService');
 const createUser = async (req, res) => {
     try 
     {
-        const userData = req.body;
+        const { name, email, password, confirmPassword } = req.body;
+        const userData = { name, email, password, confirmPassword };
         
         const canCreateUser = UserValidator.validateCreate(userData);
         if (!canCreateUser.success) return res.status(400).json({
