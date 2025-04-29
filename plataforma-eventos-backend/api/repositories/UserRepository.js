@@ -13,14 +13,21 @@ class UserRepository
         });
     }
 
-    async checkUser(emailPassed)
+    async checkUser(email)
     {
         const userCheck = await UserModel.findOne({
             paranoid: false,
-            where: { email: emailPassed }
+            where: { email }
         });
 
         return userCheck;
+    }
+
+    async validateAccount(email, number)
+    {
+        return await UserModel.update({ validationNumber: number.toString() }, {
+            where: { email }
+        });
     }
 }
 

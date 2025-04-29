@@ -32,6 +32,30 @@ const createUser = async (req, res) => {
     }
 };
 
+const validateAccount = async (req, res) => {
+    try 
+    {
+        const { email, validationNumber } = req.body;
+        
+        const canValidateAccount = UserValidator.validateAccount(email, validationNumber);
+        if (!canValidateAccount.success) return res.status(400).json({
+                error: 'Validation failed',
+                details: canValidateAccount.errors
+            });
+        
+        const userValidated = await UserService.validateAccount(email, validationNumber);
+        if (!userValidated) return res.status(500).json({ error: 'Failed to validate account' });
+        
+        return res.status(200).json({ message: 'Account validated successfully', user: userValidated.user });
+    } 
+    catch (error) 
+    {
+        console.log(error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
 module.exports = {
     createUser,
+    validateAccount
 };
