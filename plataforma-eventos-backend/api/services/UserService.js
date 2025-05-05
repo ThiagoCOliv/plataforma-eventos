@@ -38,7 +38,27 @@ async function validateAccount(id, number)
     }
 }
 
+async function login(email, password) 
+{
+    try 
+    {
+        const userCheck = await userRepository.checkUser(email);
+        if (!userCheck) throw new Error('User not found');
+        
+        const isPasswordValid = await userCheck.checkPassword(password);
+        if (!isPasswordValid) throw new Error('Invalid password');
+        
+        return userCheck;
+    } 
+    catch (error) 
+    {
+        console.error("Error logging in:", error);
+        return false;
+    }
+}
+
 module.exports = {
     createUser,
-    validateAccount
+    validateAccount,
+    login
 };

@@ -55,7 +55,29 @@ const validateAccount = async (req, res) => {
 }
 
 const loginUser = async (req, res) => {
-    res.status(500).json({ error: 'Method not implemented' });
+    try
+    {
+        const bodyIsValid = UserValidator.validateUserLogin(req.body);
+        if (!bodyIsValid.success) return res.status(400).json({
+            error: 'Validation failed',
+            details: bodyIsValid.errors
+        });
+
+        const { email, password } = req.body;
+        const userLogged = await UserService.login(email, password);
+        
+        if (!userLogged) return res.status(400).json({ error: 'Bad request' });
+        
+        return res.status(200).json({
+            message: 'Login successful',
+            token: jwt.generateToken(userLogged)
+        });
+    }
+    catch (error) 
+    {
+        console.log(error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
 }
 
 const getUserEvents = async (req, res) => {
