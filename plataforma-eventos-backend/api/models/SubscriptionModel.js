@@ -22,6 +22,7 @@ const Subscriptions = sequelize.define('Subscriptions', {
     subscriberEmail: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         field: 'subscriber_email',
         validate: {
             isEmail: true
