@@ -1,20 +1,10 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/connection');
-
 const Subscriptions = sequelize.define('Subscriptions', {
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true
-    },
-    eventId: {
-        type: DataTypes.UUID,
-        field: 'event_id',
-        allowNull: false,
-        references: {
-            model: 'Events',
-            key: 'id'
-        }
     },
     subscriberName: {
         type: DataTypes.STRING,
@@ -40,8 +30,13 @@ const Subscriptions = sequelize.define('Subscriptions', {
             isInt: true
         }
     },
+    eventId: {
+        type: DataTypes.UUID,
+        field: 'event_id'
+    },
 });
 
-(async () => await Subscriptions.sync())();
-
-module.exports = Subscriptions;
+(async () => {
+    await Subscriptions.sync();
+    module.exports = Subscriptions;
+})();

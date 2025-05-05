@@ -70,5 +70,17 @@ const Events = sequelize.define('Events', {
     });
 
     await sequelize.sync({ alter: true });
+
+    const Subscriptions = require('./SubscriptionModel');
+    Events.hasMany(Subscriptions, {
+        foreignKey: 'eventId',
+        field: 'event_id',
+        targetKey: 'id',
+        allowNull: false,
+        as: 'event'
+    });
+
+    await sequelize.sync({ alter: true });
+
     module.exports = Events;
 })();
