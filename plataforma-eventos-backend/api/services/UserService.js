@@ -17,19 +17,19 @@ async function createUser(userData)
     }
 }
 
-async function validateAccount(email, number) 
+async function validateAccount(id, number) 
 {
     try{
-        const userCheck = await userRepository.checkUser(email);
+        const userCheck = await userRepository.getUserById(id);
         if (!userCheck) throw new Error('User not found');
         
         if (userCheck.validationNumber !== number.toString()) throw new Error('Invalid validation number');
         if(userCheck.status === 'active') throw new Error('Account already validated');
 
-        const userValidated = await userRepository.validateAccount(email, number);
+        const userValidated = await userRepository.validateAccount(id, number);
         if (!userValidated) throw new Error('Failed to validate account');
         
-        return { user: userValidated };
+        return true;
     }
     catch (error) 
     {

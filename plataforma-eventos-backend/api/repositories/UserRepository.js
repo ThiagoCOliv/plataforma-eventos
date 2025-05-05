@@ -23,10 +23,18 @@ class UserRepository
         return userCheck;
     }
 
-    async validateAccount(email, number)
+    async getUserById(id)
+    {
+        return await UserModel.findOne({
+            where: { id },
+            attributes: { exclude: ['password'] }
+        });
+    }
+
+    async validateAccount(id, number)
     {
         return await UserModel.update({ status: 'active' }, {
-            where: { email, validationNumber: number.toString() },
+            where: { id, validationNumber: number.toString() },
         });
     }
 }

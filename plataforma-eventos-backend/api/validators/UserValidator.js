@@ -11,8 +11,8 @@ const validateCreate = (userData) => {
     return { success: true };
 };
 
-const validateAccount = (email, number) => {
-    const validationResult = validateInfo(email, number);
+const validateAccount = (id, number) => {
+    const validationResult = validateInfo(id, number);
 
     if (validationResult.error) return {
             success: false,
@@ -33,13 +33,13 @@ const validateUserData = (userData) => {
     return schema.validate(userData, { abortEarly: false });
 }
 
-const validateInfo = (email, number) => {
+const validateInfo = (id, number) => {
     const schema = joi.object({
-        email: joi.string().email().required(),
-        number: joi.number().integer().min(0).max(99999999).required()
+        id: joi.string().uuid().required(),
+        number: joi.string().length(8).pattern(/^[0-9]+$/).required()
     });
 
-    return schema.validate({ email, number }, { abortEarly: false });
+    return schema.validate({ id, number: number.toString() }, { abortEarly: false });
 }
 
 module.exports = {
