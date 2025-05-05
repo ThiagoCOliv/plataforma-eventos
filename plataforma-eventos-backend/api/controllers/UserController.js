@@ -81,17 +81,26 @@ const loginUser = async (req, res) => {
 }
 
 const getUserEvents = async (req, res) => {
-    return res.status(500).json({ error: 'Method not implemented' });
-}
-
-const updateUserEvent = async (req, res) => {
-    return res.status(500).json({ error: 'Method not implemented' });
+    try
+    {
+        const userId = req.user.id;
+        const userEvents = await UserService.getUserEvents(userId);
+        
+        return res.status(200).json({
+            message: 'User events retrieved successfully',
+            events: userEvents
+        });
+    }
+    catch (error)
+    {
+        console.log(error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
 }
 
 module.exports = {
     createUser,
     validateAccount,
     loginUser,
-    getUserEvents,
-    updateUserEvent
+    getUserEvents
 };

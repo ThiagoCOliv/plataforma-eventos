@@ -17,6 +17,18 @@ class EventRepository
         return await EventModel.findOne({ where: { id } });
     }
 
+    async getEventsByUserId(userId)
+    {
+        return await EventModel.findAll({ where: { userId } });
+    }
+
+    async updateEvent(id, eventData)
+    {
+        return await EventModel.update(eventData, {
+            where: { id },
+        });
+    }
+
     async subscribeToEvent(event, subscribersNumber)
     {
         return await EventModel.update({ subscriptionsLimit: event.subscriptionsLimit - subscribersNumber }, {

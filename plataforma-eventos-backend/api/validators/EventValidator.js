@@ -18,6 +18,20 @@ const validateEventData = (eventInfo) => {
     return schema.validate(eventInfo, { abortEarly: false });
 }
 
+const validateSubscription = (subscriptionInfo) => checkValidationResult(validateSubscriptionData(subscriptionInfo));
+
+const validateSubscriptionData = (subscriptionInfo) => {
+    const schema = joi.object({
+        eventId: joi.string().uuid().required(),
+        companionsNumber: joi.number().integer().min(0).max(5).required(),
+        name: joi.string().min(3).max(50).required(),
+        email: joi.string().email().required()
+    });
+
+    return schema.validate(subscriptionInfo, { abortEarly: false });
+}
+
 module.exports = {
-    validateEvent
+    validateEvent,
+    validateSubscription
 }

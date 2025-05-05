@@ -29,9 +29,29 @@ const subscribeToEvent = async (subscriptionInfo) => {
     }
 }
 
+const updateEvent = async (eventId, userId, eventData) => {
+    try 
+    {
+        const event = await eventRepository.getEventById(eventId);
+        if (!event) throw new Error('Event not found');
+        if (event.userId !== userId) throw new Error('User not authorized to update this event');
+
+        const updatedEvent = await eventRepository.updateEvent(eventId, eventData);
+        if (!updatedEvent) throw new Error('Failed to update event');
+
+        return true;
+    }
+    catch (error) 
+    {
+        console.error("Error updating event:", error);
+        return false;
+    }
+}
+
 module.exports = {
     createEvent,
     getEvents,
     getEventById,
-    subscribeToEvent
+    subscribeToEvent,
+    updateEvent
 };

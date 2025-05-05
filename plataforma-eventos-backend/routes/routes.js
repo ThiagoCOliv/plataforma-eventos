@@ -9,7 +9,7 @@ router.post('/user/login', UserController.loginUser);
 
 router.put('/user/validation', authenticate, UserController.validateAccount);
 router.get('/user/events', authenticate, UserController.getUserEvents);
-router.put('/user/events/:id', authenticate, UserController.updateUserEvent);
+router.put('/user/events/:id', authenticate, EventController.updateEvent);
 router.post('/events', authenticate, EventController.createEvent);
 
 router.get('/events', EventController.getEvents);
