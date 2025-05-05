@@ -1,7 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/connection');
 const bcrypt = require('bcryptjs');
-console.log('Loading UserModel...');
 
 const User = sequelize.define('Users',
     {
@@ -50,8 +49,6 @@ const User = sequelize.define('Users',
 User.beforeCreate(async (user) => user.password = await bcrypt.hash(user.password, 8));
 User.prototype.checkPassword = (pass) => bcrypt.compare(pass, this.password);
 
-(async () => {
-    await User.sync();    
-})();
+(async () => await User.sync())();
 
 module.exports = User;

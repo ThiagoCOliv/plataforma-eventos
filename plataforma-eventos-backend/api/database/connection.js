@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
-const { db } = require('../config/config');
+const { db } = require('../../config/config');
 
 const connection = new Sequelize(db.name, db.user, db.password, {
     host: db.host,

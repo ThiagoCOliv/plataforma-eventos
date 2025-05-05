@@ -83,12 +83,35 @@ const subscribeToEvent = async (req, res) => {
     }
 }
 
+const getUserEvents = async (req, res) => {
+    try
+    {
+        const userId = req.user.id;
+        const userEvents = await EventService.getUserEvents(userId);
+        
+        return res.status(200).json({
+            message: 'User events retrieved successfully',
+            events: userEvents
+        });
+    }
+    catch (error)
+    {
+        console.log(error);
+
+        if (error.message === 'User not found') return res.status(404).json({ error: 'User not found' });
+        if (error.message === 'Account not validated') return res.status(401).json({ error: 'Account not validated' });
+        
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
 const updateEvent = async (req, res) => {
     try
     {
         const eventId = req.params.id;
         const userId = req.user.id;
-        const eventData = req.body;
+        const { title, description, date, time, location, tag, subscriptionsLimit, image } = req.body;
+        const eventData = { title, description, date, time, location, tag, subscriptionsLimit, image };
         
         const canUpdateEvent = EventValidator.validateEvent(eventData);
         if (!canUpdateEvent.success) return res.status(400).json({
@@ -98,7 +121,7 @@ const updateEvent = async (req, res) => {
         
         const updatedEvent = await EventService.updateEvent(eventId, userId, eventData);
         
-        if (!updatedEvent) return res.status(500).json({ error: 'Failed to update event' });
+        if (!updatedEvent) throw new Error('Failed to update event');
         
         return res.status(200).json({
             message: 'Event updated successfully',
@@ -108,7 +131,11 @@ const updateEvent = async (req, res) => {
     catch (error)
     {
         console.log(error);
-        return res.status(500).json({ error: 'Internal Server Error' });
+
+        if (error.message === 'Event not found') return res.status(404).json({ error: error.message });
+        if (error.message === 'User not authorized to update this event') return res.status(401).json({ error: error.message });
+        
+        return res.status(500).json({ error: error.message || 'Internal Server Error' });
     }
 }
 
@@ -117,5 +144,6 @@ module.exports = {
     getEvents,
     getEventById,
     subscribeToEvent,
-    updateEvent
+    updateEvent,
+    getUserEvents
 }

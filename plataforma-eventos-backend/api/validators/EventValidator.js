@@ -1,5 +1,5 @@
 const joi = require('joi');
-const checkValidationResult = require('../utils/checkValidationResult');
+const checkValidationResult = require('../../utils/checkValidationResult');
 
 const validateEvent = (eventInfo) => checkValidationResult(validateEventData(eventInfo));
 

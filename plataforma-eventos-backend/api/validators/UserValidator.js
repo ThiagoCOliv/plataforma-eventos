@@ -1,5 +1,5 @@
 const joi = require('joi');
-const checkValidationResult = require('../utils/checkValidationResult');
+const checkValidationResult = require('../../utils/checkValidationResult');
 
 const validateCreate = (userData) => checkValidationResult(validateUserData(userData));
 const validateAccount = (id, number) => checkValidationResult(validateInfo(id, number));

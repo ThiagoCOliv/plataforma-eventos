@@ -1,7 +1,9 @@
 const EventRepository = require('../repositories/EventRepository');
 const SubscriptionRepository = require('../repositories/SubscriptionRepository');
+const UserRepository = require('../repositories/UserRepository');
 const eventRepository = new EventRepository();
 const subscriptionRepository = new SubscriptionRepository();
+const userRepository = new UserRepository();
 
 const createEvent = async (eventInfo) => await eventRepository.create(eventInfo);
 const getEvents = async () => await eventRepository.getEvents();
@@ -48,10 +50,28 @@ const updateEvent = async (eventId, userId, eventData) => {
     }
 }
 
+async function getUserEvents(userId)
+{
+    try 
+    {
+        const userCheck = await userRepository.getUserById(userId);
+        if (!userCheck) throw new Error('User not found');
+        if (userCheck.status !== 'active') throw new Error('Account not validated');
+
+        return await eventRepository.getEventsByUserId(userId);
+    } 
+    catch (error) 
+    {
+        console.error("Error getting user events:", error);
+        return false;
+    }
+}
+
 module.exports = {
     createEvent,
     getEvents,
     getEventById,
     subscribeToEvent,
-    updateEvent
+    updateEvent,
+    getUserEvents
 };

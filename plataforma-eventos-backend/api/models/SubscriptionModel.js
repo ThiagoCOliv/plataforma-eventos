@@ -9,7 +9,12 @@ const Subscriptions = sequelize.define('Subscriptions', {
     },
     eventId: {
         type: DataTypes.UUID,
-        field: 'event_id'
+        field: 'event_id',
+        allowNull: false,
+        references: {
+            model: 'Events',
+            key: 'id'
+        }
     },
     subscriberName: {
         type: DataTypes.STRING,
@@ -37,18 +42,6 @@ const Subscriptions = sequelize.define('Subscriptions', {
     },
 });
 
-(async () => {
-    await Subscriptions.sync();
-    const Event = require('./EventModel');
-    Event.hasMany(Subscriptions);
-    Subscriptions.belongsTo(Event, {
-        foreignKey: 'eventId',
-        field: 'event_id',
-        targetKey: 'id',
-        allowNull: false,
-        as: 'event'
-    });
+(async () => await Subscriptions.sync())();
 
-    await sequelize.sync({ alter: true });
-    module.exports = Subscriptions;
-})();
+module.exports = Subscriptions;
