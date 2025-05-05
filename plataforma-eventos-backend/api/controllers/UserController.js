@@ -54,7 +54,22 @@ const validateAccount = async (req, res) => {
     }
 }
 
+const loginUser = async (req, res) => {
+    res.status(500).json({ error: 'Method not implemented' });
+}
+
+const getUserEvents = async (req, res) => {
+    res.status(500).json({ error: 'Method not implemented' });
+}
+
+const updateUserEvent = async (req, res) => {
+    res.status(500).json({ error: 'Method not implemented' });
+}
+
 module.exports = {
     createUser,
-    validateAccount
+    validateAccount,
+    loginUser,
+    getUserEvents,
+    updateUserEvent
 };
