@@ -3,10 +3,10 @@ const swaggerFile = require('./swagger-output.json');
 const express = require('express');
 const cors = require('cors')
 const app = express();
-const routes = require('./routes/routes')
-require('dotenv').config();
+const routes = require('./routes/routes');
+const config = require('./config/config');
 
-const port = process.env.PORT || 3000;
+const port = config.app.port;
 
 app.use(cors());
 app.use(express.json());

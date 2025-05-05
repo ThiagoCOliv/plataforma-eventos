@@ -1,10 +1,10 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
-const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_DIALECT } = process.env;
+const { db } = require('../config/config');
 
-const connection = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
-    host: DB_HOST,
-    dialect: DB_DIALECT || 'mysql',
+const connection = new Sequelize(db.name, db.user, db.password, {
+    host: db.host,
+    dialect: db.dialect,
     logging: false,
     define: {
         timestamps: true,

@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const { jwt } = require('../config/config');
 
 const generateToken = (user) => {
     const header = Buffer.from(JSON.stringify({
@@ -30,7 +31,7 @@ const verifyToken = (token) => {
 }
 
 const generateSignature = (header, payload) => {
-    return Buffer.from(crypto.createHmac('sha256', process.env.JWT_SECRET).update(header + "." + payload).digest('base64')).toString('base64');
+    return Buffer.from(crypto.createHmac('sha256', jwt.secret).update(header + "." + payload).digest('base64')).toString('base64');
 }
 
 module.exports = {
