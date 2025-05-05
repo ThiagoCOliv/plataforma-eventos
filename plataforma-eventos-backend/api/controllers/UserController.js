@@ -81,11 +81,11 @@ const loginUser = async (req, res) => {
 }
 
 const getUserEvents = async (req, res) => {
-    res.status(500).json({ error: 'Method not implemented' });
+    return res.status(500).json({ error: 'Method not implemented' });
 }
 
 const updateUserEvent = async (req, res) => {
-    res.status(500).json({ error: 'Method not implemented' });
+    return res.status(500).json({ error: 'Method not implemented' });
 }
 
 module.exports = {

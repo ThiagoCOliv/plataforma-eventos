@@ -1,13 +1,5 @@
 const joi = require('joi');
-
-function checkValidationResult(validationResult) {
-    if (validationResult.error) return {
-        success: false,
-        errors: validationResult.error.details.map(err => err.message)
-    };
-
-    return { success: true };
-}
+const checkValidationResult = require('../utils/checkValidationResult');
 
 const validateCreate = (userData) => checkValidationResult(validateUserData(userData));
 const validateAccount = (id, number) => checkValidationResult(validateInfo(id, number));
