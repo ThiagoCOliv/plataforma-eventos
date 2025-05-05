@@ -1,19 +1,24 @@
 const EventRepository = require('../repositories/EventRepository');
+const SubscriptionRepository = require('../repositories/SubscriptionRepository');
 const eventRepository = new EventRepository();
+const subscriptionRepository = new SubscriptionRepository();
 
 const createEvent = async (eventInfo) => await eventRepository.create(eventInfo);
 const getEvents = async () => await eventRepository.getEvents();
 const getEventById = async (id) => await eventRepository.getEventById(id);
 
-const subscribeToEvent = async (eventId, subscribersNumber) => {
+const subscribeToEvent = async (subscriptionInfo) => {
     try 
     {
-        const event = await eventRepository.getEventById(eventId);
+        const event = await eventRepository.getEventById(subscriptionInfo.eventId);
         if (!event) throw new Error('Event not found');
-        if (event.subscriptionsLimit < subscribersNumber) throw new Error('Event subscriptions limit reached');
+        if (event.subscriptionsLimit < subscriptionInfo.companionsNumber + 1) throw new Error('Event subscriptions limit reached');
 
-        const eventSubscribed = await eventRepository.subscribeToEvent(event, subscribersNumber);
+        const eventSubscribed = await subscriptionRepository.subscribeToEvent(subscriptionInfo);
         if (!eventSubscribed) throw new Error('Failed to subscribe to event');
+
+        const eventUpdated = await eventRepository.subscribeToEvent(event, eventSubscribed.companionsNumber + 1);
+        if (!eventUpdated) throw new Error('Failed to update event subscriptions limit');
 
         return true;
     }

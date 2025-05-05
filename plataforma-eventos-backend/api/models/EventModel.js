@@ -1,4 +1,3 @@
-console.log('Loading EventModel...');
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/connection');
 
