@@ -5,7 +5,12 @@ const eventRepository = new EventRepository();
 const subscriptionRepository = new SubscriptionRepository();
 const userRepository = new UserRepository();
 
-const createEvent = async (eventInfo) => await eventRepository.create(eventInfo);
+const createEvent = async (eventInfo) => {
+    const userCheck = await userRepository.getUserById(eventInfo.userId);
+    if (!userCheck) throw new Error('User not found');
+
+    return await eventRepository.create(eventInfo)
+};
 const getEvents = async () => await eventRepository.getEvents();
 const getEventById = async (id) => await eventRepository.getEventById(id);
 
