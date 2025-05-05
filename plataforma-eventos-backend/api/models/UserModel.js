@@ -38,7 +38,11 @@ const User = sequelize.define('Users',
         },
         validationNumber: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                len: [8, 8],
+                isNumeric: true
+            }
         }
     }
 );
