@@ -34,14 +34,6 @@ const User = sequelize.define('Users',
         status: {
             type: DataTypes.ENUM('active', 'inactive', 'pending'),
             defaultValue: 'pending'
-        },
-        validationNumber: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [8, 8],
-                isNumeric: true
-            }
         }
     }
 );

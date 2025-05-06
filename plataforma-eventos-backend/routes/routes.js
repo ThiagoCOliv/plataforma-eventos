@@ -15,6 +15,7 @@ router.put('/user/events/:id', authenticate, EventController.updateEvent);
 router.get('/user/events', authenticate, EventController.getUserEvents);
 router.get('/events', EventController.getEvents);
 router.get('/events/:id', EventController.getEventById);
+router.get('/user/validation-number', authenticate, UserController.getValidationNumber);
 
 
 module.exports = router;

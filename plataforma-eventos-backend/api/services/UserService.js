@@ -1,7 +1,5 @@
 const UserRepository = require('../repositories/UserRepository');
-const EventRepository = require('../repositories/EventRepository');
 const userRepository = new UserRepository();
-const eventRepository = new EventRepository();
 
 async function createUser(userData) 
 {
@@ -25,10 +23,12 @@ async function validateAccount(id, number)
         const userCheck = await userRepository.getUserById(id);
         if (!userCheck) throw new Error('User not found');
         
-        if (userCheck.validationNumber !== number.toString()) throw new Error('Invalid validation number');
+        const cachedNumber = cache.getCache(userCheck.email);
+        if (!cachedNumber) throw new Error('Validation number expired or not found');
+        if (cachedNumber !== number.toString()) throw new Error('Invalid validation number');
         if(userCheck.status === 'active') throw new Error('Account already validated');
 
-        const userValidated = await userRepository.validateAccount(id, number);
+        const userValidated = await userRepository.validateAccount(userCheck.email);
         if (!userValidated) throw new Error('Failed to validate account');
         
         return true;
