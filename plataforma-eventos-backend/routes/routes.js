@@ -10,12 +10,11 @@ router.post('/events/:id/subscribe', EventController.subscribeToEvent);
 router.post('/events', authenticate, EventController.createEvent);
 
 router.put('/user/validation', authenticate, UserController.validateAccount);
-router.put('/user/events/:id', authenticate, EventController.updateEvent);
+router.put('/events/:id', authenticate, EventController.updateEvent);
 
 router.get('/user/events', authenticate, EventController.getUserEvents);
 router.get('/events', EventController.getEvents);
 router.get('/events/:id', EventController.getEventById);
-router.get('/user/validation-number', authenticate, UserController.getValidationNumber);
-
+router.get('/user/validation/number', authenticate, UserController.getValidationNumber);
 
 module.exports = router;

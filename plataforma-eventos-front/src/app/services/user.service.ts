@@ -10,11 +10,31 @@ import { Observable } from 'rxjs';
 
 export class UserService 
 {
-  private apiUrl = `${environment.apiBaseUrl}users`;
+  private apiUrl = `${environment.apiBaseUrl}user`;
   constructor(private readonly http: HttpClient) { }
 
-  postUser(user: User): Observable<HttpResponse<User>>
+  postUser(user: User): Observable<HttpResponse<any>>
   {
     return this.http.post<User>(this.apiUrl, user, { observe: 'response' });
+  }
+
+  loginUser(email: string, password: string): Observable<HttpResponse<any>>
+  {
+    return this.http.post(`${this.apiUrl}/login`, { email, password }, { observe: 'response' });
+  }
+
+  validateUser(number: number): Observable<HttpResponse<any>>
+  {
+    return this.http.put(`${this.apiUrl}/validation`, { number }, { observe: 'response' });
+  }
+
+  getUserEvents(): Observable<HttpResponse<any>>
+  {
+    return this.http.get(`${this.apiUrl}/events`, { observe: 'response' });
+  }
+
+  getValidationNumber(): Observable<HttpResponse<any>>
+  {
+    return this.http.get(`${this.apiUrl}/validation/number`, { observe: 'response' });
   }
 }

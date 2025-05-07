@@ -69,7 +69,8 @@ const getEventById = async (req, res) => {
 const subscribeToEvent = async (req, res) => {
     try 
     {
-        const { eventId, companionsNumber, name, email } = req.body;
+        const eventId = req.params.id;
+        const { companionsNumber, name, email } = req.body;
         
         const subscriptionInfo = { eventId, companionsNumber, name, email };
         
