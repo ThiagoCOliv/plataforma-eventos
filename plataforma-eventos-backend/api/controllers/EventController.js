@@ -80,8 +80,7 @@ const subscribeToEvent = async (req, res) => {
         });
         
         const isSubscribed = await EventService.subscribeToEvent(subscriptionInfo);
-        
-        if (!isSubscribed) return res.status(500).json({ error: 'Failed to subscribe to event' });
+        if (!isSubscribed) throw new Error('Failed to subscribe to event');
         
         return res.status(200).json({ message: 'Subscribed to event successfully' });
     } 

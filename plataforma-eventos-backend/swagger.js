@@ -19,19 +19,46 @@ const doc = {
                 password: "password123",
                 confirmPassword: "password123"
             },
-            UserCreationResponse: {
+            userCreationResponse: {
                 message: "User created successfully",
-                status: 201,
-                userCreated: {
-                    id: 1,
-                    name: "Jhon Doe",
-                    email: "jhondoe@gmail.com",
-                    password: "password123",
-                    status: "pending",
-                    createdAt: "2023-10-01T00:00:00.000Z",
-                    updatedAt: "2023-10-01T00:00:00.000Z"
-                }
-            }
+                token: "jwt_token"
+            },
+            userLogin: {
+                email: "jhondoe@gmail.com",
+                password: "password123",
+            },
+            userLoginResponse: {
+                message: "Login successful",
+                token: "jwt_token"
+            },
+            event:{
+                title: "Show de talentos",
+                description: "Um evento para mostrar os talentos da galera",
+                date: "2025-10-01",
+                time: "18:00",
+                location: "São Paulo-SP",
+                tag: "educacional",
+                subscriptionsLimit: 500,
+                image: "https://example.com/image.jpg",
+            },
+            eventCreationResponse:{
+                message: "Event created successfully"
+            },
+            eventSubscription:{
+                eventId: "uuid",
+                companionsNumber: 3,
+                name: "Jhon Doe",
+                email: "jhondoe@gmail.com"
+            },
+            eventSubscriptionResponse:{
+                message: "Subscribed to event successfully"
+            },
+            userValidation:{
+                validationNumber: 12345678
+            },
+            userValidationResponse:{
+                message: "Account validated successfully"
+            },
         },
         securitySchemes:{
             bearerAuth: {
