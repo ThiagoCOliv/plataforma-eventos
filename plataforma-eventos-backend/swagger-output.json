@@ -437,49 +437,136 @@
           }
         }
       },
-      "UserCreationResponse": {
+      "userCreationResponse": {
         "type": "object",
         "properties": {
           "message": {
             "type": "string",
             "example": "User created successfully"
           },
-          "status": {
-            "type": "number",
-            "example": 201
+          "token": {
+            "type": "string",
+            "example": "jwt_token"
+          }
+        }
+      },
+      "userLogin": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "jhondoe@gmail.com"
           },
-          "userCreated": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "number",
-                "example": 1
-              },
-              "name": {
-                "type": "string",
-                "example": "Jhon Doe"
-              },
-              "email": {
-                "type": "string",
-                "example": "jhondoe@gmail.com"
-              },
-              "password": {
-                "type": "string",
-                "example": "password123"
-              },
-              "status": {
-                "type": "string",
-                "example": "pending"
-              },
-              "createdAt": {
-                "type": "string",
-                "example": "2023-10-01T00:00:00.000Z"
-              },
-              "updatedAt": {
-                "type": "string",
-                "example": "2023-10-01T00:00:00.000Z"
-              }
-            }
+          "password": {
+            "type": "string",
+            "example": "password123"
+          }
+        }
+      },
+      "userLoginResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Login successful"
+          },
+          "token": {
+            "type": "string",
+            "example": "jwt_token"
+          }
+        }
+      },
+      "event": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Show de talentos"
+          },
+          "description": {
+            "type": "string",
+            "example": "Um evento para mostrar os talentos da galera"
+          },
+          "date": {
+            "type": "string",
+            "example": "2025-10-01"
+          },
+          "time": {
+            "type": "string",
+            "example": "18:00"
+          },
+          "location": {
+            "type": "string",
+            "example": "São Paulo-SP"
+          },
+          "tag": {
+            "type": "string",
+            "example": "educacional"
+          },
+          "subscriptionsLimit": {
+            "type": "number",
+            "example": 500
+          },
+          "image": {
+            "type": "string",
+            "example": "https://example.com/image.jpg"
+          }
+        }
+      },
+      "eventCreationResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Event created successfully"
+          }
+        }
+      },
+      "eventSubscription": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "example": "uuid"
+          },
+          "companionsNumber": {
+            "type": "number",
+            "example": 3
+          },
+          "name": {
+            "type": "string",
+            "example": "Jhon Doe"
+          },
+          "email": {
+            "type": "string",
+            "example": "jhondoe@gmail.com"
+          }
+        }
+      },
+      "eventSubscriptionResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Subscribed to event successfully"
+          }
+        }
+      },
+      "userValidation": {
+        "type": "object",
+        "properties": {
+          "validationNumber": {
+            "type": "number",
+            "example": 12345678
+          }
+        }
+      },
+      "userValidationResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Account validated successfully"
           }
         }
       }
