@@ -31,7 +31,7 @@ export class CadastrarUserComponent
     this.cancelar.emit();
   }
 
-  cadastroRealizado = output<string>();
+  cadastroRealizado = output<object>();
 
   onSubmit() 
   {
@@ -44,8 +44,9 @@ export class CadastrarUserComponent
     this.httpSubscription = this.service.postUser(this.profileForm.value as User).subscribe(res => {
       if(res.status === 201)
       {
+        const emit = { email: this.profileForm.value.email, res };
         this.profileForm.reset();
-        this.cadastroRealizado.emit(res.body!.email as string);
+        this.cadastroRealizado.emit(emit);
       }
       else
       {

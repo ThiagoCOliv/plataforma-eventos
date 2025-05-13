@@ -23,9 +23,9 @@ export class UserService
     return this.http.post(`${this.apiUrl}/login`, { email, password }, { observe: 'response' });
   }
 
-  validateUser(number: number): Observable<HttpResponse<any>>
+  validateUser(validationNumber: number): Observable<HttpResponse<any>>
   {
-    return this.http.put(`${this.apiUrl}/validation`, { number }, { observe: 'response' });
+    return this.http.put(`${this.apiUrl}/validation`, { validationNumber }, { observe: 'response' });
   }
 
   getUserEvents(): Observable<HttpResponse<any>>

@@ -16,7 +16,7 @@ export class NavbarComponent
   dialogsOpen = {
     login: false,
     cadastro: false,
-    cadastroMessage: false
+    cadastroValidation: false
   }
 
   email: string = '';
@@ -31,9 +31,10 @@ export class NavbarComponent
     this.dialogsOpen[modal as keyof typeof this.dialogsOpen] = false;
   }
 
-  exibirMensagem(email: string)
+  exibirModalValidacao(obj: any)
   {
-    this.email = email;
-    this.abrirModal('cadastroMessage');
+    this.email = obj.email as string;
+    localStorage.setItem('token_jwt', obj.res.body.token as string);
+    this.abrirModal('cadastroValidation');
   }
 }

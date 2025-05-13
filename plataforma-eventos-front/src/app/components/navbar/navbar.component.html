@@ -16,9 +16,9 @@
 }
 @else if(dialogsOpen.cadastro)
 {
-    <app-cadastrar-user (cancelar)="abrirModal('login')" (cadastroRealizado)="exibirMensagem($event)"></app-cadastrar-user>
+    <app-cadastrar-user (cancelar)="abrirModal('login')" (cadastroRealizado)="exibirModalValidacao($event)"></app-cadastrar-user>
 }
-@else if(dialogsOpen.cadastroMessage)
+@else if(dialogsOpen.cadastroValidation)
 {
-    <app-cadastrar-user-mensagem [emailCadastrado]="email" (closeModal)="fecharModal('cadastroMessage')"></app-cadastrar-user-mensagem>
+    <app-cadastrar-user-mensagem [emailCadastrado]="email" (accountValidated)="abrirModal('login')" (closeModal)="fecharModal('cadastroValidation')"></app-cadastrar-user-mensagem>
 }

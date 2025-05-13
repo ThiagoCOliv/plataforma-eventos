@@ -10,6 +10,12 @@
             <input type="number" formControlName="number" id="number" placeholder="Digite o número" required>
         </div>
         <div class="buttons">
+            <div>
+                <p>Não recebeu o e-mail?</p>
+                <p class="resend-email">Verifique a caixa de spam ou clique no botão abaixo para reenviar o e-mail.</p>
+                <button type="button" class="resend-btn" (click)="reenviarEmail()" [disabled]="btnReenviarEmailIsDisabled">Reenviar e-mail</button>
+            </div>
+            
             <button class="close-btn" (click)="fecharModal()">Cancelar</button>
             <button class="submit-btn" type="submit" [disabled]="!validationForm.valid">Enviar</button>
         </div>
