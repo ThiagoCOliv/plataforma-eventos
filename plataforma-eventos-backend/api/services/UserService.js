@@ -8,7 +8,7 @@ async function createUser(userData)
         const userRecord = await userRepository.create(userData);
         delete userRecord.password;
     
-        return { user: userRecord };
+        return userRecord;
     }
     catch (error) 
     {

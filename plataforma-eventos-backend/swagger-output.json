@@ -119,9 +119,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "eventId": {
-                    "example": "any"
-                  },
                   "companionsNumber": {
                     "example": "any"
                   },
@@ -260,7 +257,7 @@
         }
       }
     },
-    "/user/events/{id}": {
+    "/events/{id}": {
       "put": {
         "description": "",
         "parameters": [
@@ -332,6 +329,30 @@
             }
           }
         }
+      },
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     },
     "/user/events": {
@@ -362,33 +383,7 @@
         }
       }
     },
-    "/events/{id}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/user/validation-number": {
+    "/user/validation/number": {
       "get": {
         "description": "",
         "parameters": [

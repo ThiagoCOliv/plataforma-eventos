@@ -19,7 +19,7 @@ const createUser = async (req, res) => {
         
         if (!await sendValidtionNumber(userData)) throw new Error('Failed to send email');
 
-        const { user } = await UserService.createUser(userData);
+        const user = await UserService.createUser(userData);
         
         return res.status(201).json({
             message: 'User created successfully',
