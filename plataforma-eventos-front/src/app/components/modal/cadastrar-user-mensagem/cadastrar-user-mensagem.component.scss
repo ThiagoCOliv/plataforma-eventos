@@ -55,21 +55,92 @@ dialog {
                     box-shadow: 0 0 4px var(--main-color-light);
                 }
             }
+
+            & p {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+
+                span {
+                    color: var(--main-color-light);
+                    font-size: 1rem;
+                    border-radius: 50%;
+                    border: 1px solid var(--main-color-light);
+                    padding: 0.25rem 0.75rem;
+                    position: relative;
+                    transition: all 0.3s ease-in-out;
+
+                    &:hover {
+                        cursor: pointer;
+                        background: var(--main-color-light);
+                        color: #0F111A;
+
+                        &::after{
+                            content: 'Verifique a caixa de spam ou clique no botão abaixo para reenviar o e-mail.';
+                            position: absolute;
+                            top: 2rem;
+                            width: 300px;
+                            background: #0F111A;
+                            padding: 0.5rem;
+                            border-radius: 5px;
+                            color: canvastext;
+                            border: 1px solid var(--main-color-light);
+                            font-size: 0.8rem;
+                        }
+                    }
+                }
+
+                & button {
+                    flex: 1;
+                    background: #fff0;
+                    border: 0;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    color: var(--main-color-light);
+                    transition: all 0.3s ease-in-out;
+                    text-align: center;
+
+                    &:hover, &:focus {
+                        text-decoration: underline;
+                    }
+
+                    &:disabled {
+                        color: #ccc;
+                        cursor: not-allowed;
+
+                        &:hover, &:focus {
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
         }
 
-        & button {
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            font-size: 1.25rem;
-            width: 100%;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-            border: none;
-            background: var(--main-color-dark);
+        & .buttons {
+            display: flex;
+            gap: 1rem;
 
-            &:hover, &:focus {
-                outline: none;
-                filter: drop-shadow(0 0 4px var(--main-color-light));
+            & button {
+                flex: 1;
+                padding: 0.5rem 1rem;
+                border-radius: 5px;
+                font-size: 1.25rem;
+                width: 100%;
+                cursor: pointer;
+                transition: all 0.3s ease-in-out;
+                border: none;
+                background: var(--main-color-dark);
+    
+                &:hover, &:focus {
+                    outline: none;
+                    filter: drop-shadow(0 0 4px var(--main-color-light));
+                }
+
+                &.close-btn
+                {
+                    background: #fff0;
+                    border: 1px solid var(--main-color-dark);
+                }
             }
         }
     }
