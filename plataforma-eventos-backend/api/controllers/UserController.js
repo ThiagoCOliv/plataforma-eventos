@@ -37,7 +37,7 @@ const validateAccount = async (req, res) => {
     try 
     {
         const { validationNumber } = req.body;
-        const id = req.user.id;
+        const id = req.user;
         
         const canValidateAccount = UserValidator.validateAccount(id, validationNumber);
         if (!canValidateAccount.success) return res.status(400).json({
@@ -87,7 +87,7 @@ const loginUser = async (req, res) => {
 const getValidationNumber = async (req, res) => {
     try 
     {
-        const id = req.user.id;
+        const id = req.user;
         const user = await UserService.getUserById(id);
         if (!user) throw new Error('User not found');
         if (user.status === 'active') throw new Error('Account already validated');

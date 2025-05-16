@@ -22,7 +22,7 @@ const verifyToken = (token) => {
     const expectedSignature = generateSignature(header, payload);
 
     if (signature !== expectedSignature) throw new Error('Invalid token signature');
-
+    
     const decodedPayload = JSON.parse(Buffer.from(payload, 'base64').toString('utf-8'));
 
     if (decodedPayload.exp < new Date().getTime()) throw new Error('Token expired');

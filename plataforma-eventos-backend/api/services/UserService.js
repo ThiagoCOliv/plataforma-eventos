@@ -1,5 +1,6 @@
 const UserRepository = require('../repositories/UserRepository');
 const userRepository = new UserRepository();
+const cache = require('../../utils/node-cache');
 
 async function createUser(userData) 
 {
@@ -25,7 +26,7 @@ async function validateAccount(id, number)
         
         const cachedNumber = cache.getCache(userCheck.email);
         if (!cachedNumber) throw new Error('Validation number expired or not found');
-        if (cachedNumber !== number.toString()) throw new Error('Invalid validation number');
+        if (cachedNumber !== number) throw new Error('Invalid validation number');
         if(userCheck.status === 'active') throw new Error('Account already validated');
 
         const userValidated = await userRepository.validateAccount(userCheck.email);
@@ -59,8 +60,25 @@ async function login(email, password)
     }
 }
 
+async function getUserById(id) 
+{
+    try 
+    {
+        const user = await userRepository.getUserById(id);
+        if (!user) throw new Error('User not found');
+        
+        return user;
+    } 
+    catch (error) 
+    {
+        console.error("Error fetching user by ID:", error);
+        return false;
+    }
+}
+
 module.exports = {
     createUser,
     validateAccount,
-    login
+    login,
+    getUserById
 };

@@ -7,7 +7,14 @@
             <li><a routerLink="/sobre">Sobre</a></li>
         </ul>
     </div>
-    <button (click)="abrirModal('login')">Login</button>
+    @if (userIsLogged) 
+    {
+        <button>{{ user.name }}</button>
+    }
+    @else 
+    {
+        <button (click)="abrirModal('login')">Login</button>
+    }
 </nav>
 
 @if(dialogsOpen.login)
@@ -20,5 +27,5 @@
 }
 @else if(dialogsOpen.cadastroValidation)
 {
-    <app-cadastrar-user-mensagem [emailCadastrado]="email" (accountValidated)="abrirModal('login')" (closeModal)="fecharModal('cadastroValidation')"></app-cadastrar-user-mensagem>
+    <app-cadastrar-user-mensagem [userCadastrado]="user" (accountValidated)="login()" (closeModal)="fecharModal('cadastroValidation')"></app-cadastrar-user-mensagem>
 }

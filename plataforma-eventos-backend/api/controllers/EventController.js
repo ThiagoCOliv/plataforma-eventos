@@ -4,7 +4,7 @@ const EventService = require('../services/EventService');
 const createEvent = async (req, res) => {
     try {
         const { title, description, date, time, location, tag, subscriptionsLimit, image } = req.body;
-        const userId = req.user.id;
+        const userId = req.user;
 
         const eventInfo = { title, description, date, time, location, tag, subscriptionsLimit, image, userId };
         
@@ -99,7 +99,7 @@ const subscribeToEvent = async (req, res) => {
 const getUserEvents = async (req, res) => {
     try
     {
-        const userId = req.user.id;
+        const userId = req.user;
         const userEvents = await EventService.getUserEvents(userId);
         
         return res.status(200).json({
@@ -122,7 +122,7 @@ const updateEvent = async (req, res) => {
     try
     {
         const eventId = req.params.id;
-        const userId = req.user.id;
+        const userId = req.user;
         const { title, description, date, time, location, tag, subscriptionsLimit, image } = req.body;
         const eventData = { title, description, date, time, location, tag, subscriptionsLimit, image };
         

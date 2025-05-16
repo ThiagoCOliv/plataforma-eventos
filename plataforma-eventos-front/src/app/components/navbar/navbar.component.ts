@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LoginComponent } from "../modal/login/login.component";
 import { CadastrarUserComponent } from "../modal/cadastrar-user/cadastrar-user.component";
 import { CadastrarUserMensagemComponent } from "../modal/cadastrar-user-mensagem/cadastrar-user-mensagem.component";
+import { User } from '../../interfaces/User.interface';
 
 @Component({
   selector: 'app-navbar',
@@ -13,13 +14,15 @@ import { CadastrarUserMensagemComponent } from "../modal/cadastrar-user-mensagem
 
 export class NavbarComponent 
 {
+  userIsLogged: boolean = false;
+
   dialogsOpen = {
     login: false,
     cadastro: false,
     cadastroValidation: false
   }
 
-  email: string = '';
+  user!: User;
 
   abrirModal(modal: string) 
   {
@@ -31,10 +34,23 @@ export class NavbarComponent
     this.dialogsOpen[modal as keyof typeof this.dialogsOpen] = false;
   }
 
+  fecharModais() 
+  {
+    Object.keys(this.dialogsOpen).forEach((key) => this.dialogsOpen[key as keyof typeof this.dialogsOpen] = false);
+  }
+
   exibirModalValidacao(obj: any)
   {
-    this.email = obj.email as string;
+    this.user.email = obj.user.email as string;
+    this.user.name = obj.user.name as string;
+    this.user.password = obj.user.password as string;
     localStorage.setItem('token_jwt', obj.res.body.token as string);
     this.abrirModal('cadastroValidation');
+  }
+
+  login()
+  {
+    this.userIsLogged = true;
+    this.fecharModais();
   }
 }

@@ -19,7 +19,7 @@
         </div>
         <div class="buttons">
             <button class="close-btn" (click)="close()">Cancelar</button>
-            <button class="submit-btn" type="submit" [disabled]="!profileForm.valid">Cadastrar</button>
+            <button class="submit-btn" type="submit" [disabled]="profileForm.invalid">Cadastrar</button>
         </div>
     </form>
 </dialog>

@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { Subscription } from 'rxjs';
+import { User } from '../../../interfaces/User.interface';
 
 @Component({
   selector: 'app-cadastrar-user-mensagem',
@@ -13,7 +14,7 @@ import { Subscription } from 'rxjs';
 
 export class CadastrarUserMensagemComponent implements OnInit, OnDestroy
 {
-  @Input() emailCadastrado: string = '';
+  @Input() userCadastrado!: User;
   closeModal = output();
   accountValidated = output<boolean>();
 
@@ -34,7 +35,7 @@ export class CadastrarUserMensagemComponent implements OnInit, OnDestroy
     this.desativarBotaoReenviarEmail();
   }
 
-  validationForm = new FormGroup({ number: new FormControl(0, [Validators.required, Validators.minLength(8), Validators.maxLength(8)]) });
+  validationForm: FormGroup = new FormGroup({ number: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(99999999)]) });
 
   fecharModal() 
   {
@@ -57,7 +58,7 @@ export class CadastrarUserMensagemComponent implements OnInit, OnDestroy
 
   reenviarEmail()
   {
-    this.httpSubscriptions.push(this.service.getValidationNumber().subscribe(res => res.status === 200 ? this.fecharModal() : console.error("Erro ao reenviar email:", res)));
+    this.httpSubscriptions.push(this.service.getValidationNumber().subscribe(res => res.status === 200 ? alert('Verifique seu email') : console.error("Erro ao reenviar email:", res)));
     this.desativarBotaoReenviarEmail();
   }
 
