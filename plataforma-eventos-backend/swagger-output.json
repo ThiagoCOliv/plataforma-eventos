@@ -468,6 +468,15 @@
           "token": {
             "type": "string",
             "example": "jwt_token"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "Jhon Doe"
+              }
+            }
           }
         }
       },

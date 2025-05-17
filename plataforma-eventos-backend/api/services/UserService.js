@@ -48,7 +48,7 @@ async function login(email, password)
         const userCheck = await userRepository.checkUser(email);
         if (!userCheck) throw new Error('User not found');
         
-        const isPasswordValid = await userCheck.checkPassword(password);
+        const isPasswordValid = await userCheck.checkPassword(password, userCheck.password);
         if (!isPasswordValid) throw new Error('Invalid password');
 
         if (userCheck.status === 'pending') throw new Error('Account not validated');
