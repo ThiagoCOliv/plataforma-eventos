@@ -7,9 +7,9 @@
             <li><a routerLink="/sobre">Sobre</a></li>
         </ul>
     </div>
-    @if (userIsLogged) 
+    @if (userIsLogged)
     {
-        <button>{{ user.name }}</button>
+        <button>{{ username }}</button>
     }
     @else 
     {
@@ -27,5 +27,5 @@
 }
 @else if(dialogsOpen.cadastroValidation)
 {
-    <app-cadastrar-user-mensagem [userCadastrado]="user" (accountValidated)="login()" (closeModal)="fecharModal('cadastroValidation')"></app-cadastrar-user-mensagem>
+    <app-cadastrar-user-mensagem (accountValidated)="login()" (closeModal)="fecharModal('cadastroValidation')"></app-cadastrar-user-mensagem>
 }

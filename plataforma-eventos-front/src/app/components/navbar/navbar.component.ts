@@ -14,15 +14,14 @@ import { User } from '../../interfaces/User.interface';
 
 export class NavbarComponent 
 {
-  userIsLogged: boolean = false;
+  userIsLogged: boolean = localStorage.getItem('jwt_token') ? true : false;
+  username: string = localStorage.getItem('username') || '';
 
   dialogsOpen = {
     login: false,
     cadastro: false,
     cadastroValidation: false
   }
-
-  user!: User;
 
   abrirModal(modal: string) 
   {
@@ -41,16 +40,19 @@ export class NavbarComponent
 
   exibirModalValidacao(obj: any)
   {
-    this.user.email = obj.user.email as string;
-    this.user.name = obj.user.name as string;
-    this.user.password = obj.user.password as string;
-    localStorage.setItem('token_jwt', obj.res.body.token as string);
+    sessionStorage.setItem('user', JSON.stringify(obj.user));
+    sessionStorage.setItem('jwt_token', obj.res.body.token as string);
     this.abrirModal('cadastroValidation');
   }
 
   login()
   {
     this.userIsLogged = true;
+    localStorage.setItem('username', JSON.parse(sessionStorage.getItem('user') || '{}').name);
+    localStorage.setItem('jwt_token', sessionStorage.getItem('jwt_token') || '');
+    sessionStorage.removeItem('jwt_token');
+    sessionStorage.removeItem('user');
+    this.username = localStorage.getItem('username') || '';
     this.fecharModais();
   }
 }

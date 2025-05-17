@@ -44,7 +44,7 @@ export class CadastrarUserComponent
     this.httpSubscription = this.service.postUser(this.profileForm.value as User).subscribe(res => {
       if(res.status === 201)
       {
-        const emit = { email: this.profileForm.value.email, res };
+        const emit = { user: this.profileForm.value, res };
         this.profileForm.reset();
         this.cadastroRealizado.emit(emit);
       }

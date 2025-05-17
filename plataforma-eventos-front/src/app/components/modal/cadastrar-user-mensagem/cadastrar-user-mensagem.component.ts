@@ -14,7 +14,7 @@ import { User } from '../../../interfaces/User.interface';
 
 export class CadastrarUserMensagemComponent implements OnInit, OnDestroy
 {
-  @Input() userCadastrado!: User;
+  userCadastrado: User = JSON.parse(sessionStorage.getItem('user') || '{}');
   closeModal = output();
   accountValidated = output<boolean>();
 
