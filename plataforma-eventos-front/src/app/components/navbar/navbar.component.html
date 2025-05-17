@@ -19,7 +19,7 @@
 
 @if(dialogsOpen.login)
 {
-    <app-login (closeModal)="fecharModal('login')" (abrirModalCadastro)="abrirModal('cadastro')"></app-login>
+    <app-login (closeModal)="fecharModal('login')" (loginSuccess)="login()" (abrirModalCadastro)="abrirModal('cadastro')"></app-login>
 }
 @else if(dialogsOpen.cadastro)
 {
@@ -27,5 +27,5 @@
 }
 @else if(dialogsOpen.cadastroValidation)
 {
-    <app-cadastrar-user-mensagem (accountValidated)="login()" (closeModal)="fecharModal('cadastroValidation')"></app-cadastrar-user-mensagem>
+    <app-cadastrar-user-mensagem (accountValidated)="contaValidada()" (closeModal)="fecharModal('cadastroValidation')"></app-cadastrar-user-mensagem>
 }

@@ -48,11 +48,16 @@ export class NavbarComponent
   login()
   {
     this.userIsLogged = true;
+    this.username = localStorage.getItem('username') || '';
+    this.fecharModais();
+  }
+
+  contaValidada()
+  {
     localStorage.setItem('username', JSON.parse(sessionStorage.getItem('user') || '{}').name);
     localStorage.setItem('jwt_token', sessionStorage.getItem('jwt_token') || '');
     sessionStorage.removeItem('jwt_token');
     sessionStorage.removeItem('user');
-    this.username = localStorage.getItem('username') || '';
-    this.fecharModais();
+    this.login();
   }
 }
