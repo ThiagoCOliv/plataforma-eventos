@@ -73,7 +73,10 @@ const loginUser = async (req, res) => {
         
         return res.status(200).json({
             message: 'Login successful',
-            token: jwt.generateToken(userLogged)
+            token: jwt.generateToken(userLogged),
+            user: {
+                name: userLogged.name
+            }
         });
     }
     catch (error) 

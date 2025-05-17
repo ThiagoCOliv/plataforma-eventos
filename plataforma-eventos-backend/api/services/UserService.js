@@ -50,6 +50,9 @@ async function login(email, password)
         
         const isPasswordValid = await userCheck.checkPassword(password);
         if (!isPasswordValid) throw new Error('Invalid password');
+
+        if (userCheck.status === 'pending') throw new Error('Account not validated');
+        if (userCheck.status === 'inactive') throw new Error('Account inactive');
         
         return userCheck;
     } 

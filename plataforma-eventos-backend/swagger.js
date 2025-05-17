@@ -29,7 +29,10 @@ const doc = {
             },
             userLoginResponse: {
                 message: "Login successful",
-                token: "jwt_token"
+                token: "jwt_token",
+                user: {
+                    name: "Jhon Doe"
+                }
             },
             event:{
                 title: "Show de talentos",
