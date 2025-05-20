@@ -17,6 +17,8 @@ export class NavbarComponent
   userIsLogged: boolean = localStorage.getItem('jwt_token') ? true : false;
   username: string = localStorage.getItem('username') || '';
 
+  userMenuOpen: string = 'closed';
+
   dialogsOpen = {
     login: false,
     cadastro: false,
@@ -59,5 +61,22 @@ export class NavbarComponent
     sessionStorage.removeItem('jwt_token');
     sessionStorage.removeItem('user');
     this.login();
+  }
+
+  userMenuToggle()
+  {
+    this.userMenuOpen = this.userMenuOpen == 'closed' ? 'open' : 'closed';
+  }
+
+  logout()
+  {
+    if(confirm('Você tem certeza que deseja sair?'))
+    {
+      localStorage.removeItem('jwt_token');
+      localStorage.removeItem('username');
+      this.userIsLogged = false;
+      this.username = '';
+      this.userMenuOpen = 'closed';
+    }
   }
 }

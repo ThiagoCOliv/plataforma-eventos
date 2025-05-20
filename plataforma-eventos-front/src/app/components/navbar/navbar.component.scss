@@ -53,4 +53,71 @@ nav{
             filter: drop-shadow(0 0 4px var(--main-color-light));
         }
     }
+
+    & .user-logged-menu {
+        position: relative;
+
+        & .user-logged-btn {
+            position: relative;
+            z-index: 2;
+        }
+
+        & .user-menu-dropdown {
+            width: 100%;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--bg-color-dark);
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 8px #0002;
+            display: block;
+            list-style: none;
+            z-index: 1;
+            overflow: hidden;
+            height: 0;
+            transition: all 0.7s ease-in-out;
+
+            & li {
+                width: 100%;
+                padding: 0.5rem 0;
+                font-size: 1rem;
+                
+                & a, & button {
+                    text-decoration: none;
+                    text-align: center;
+                    margin: 0 auto;
+                    background: transparent;
+                    color: var(--text-color-white);
+                    font-size: 1rem;
+                    padding: 0.5rem;
+                    font-weight: normal;
+
+                    &:hover{
+                        filter: drop-shadow(0 0 4px var(--main-color-light));
+                    }
+                }
+
+                &:hover {
+                    background: var(--bg-color-light);
+                    color: var(--main-color-light);
+                }
+            }
+
+            &.open {
+                height: auto;
+                animation: fadeInMenu 0.3s ease-in-out;
+            }
+        }
+    }
+}
+
+@keyframes fadeInMenu {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

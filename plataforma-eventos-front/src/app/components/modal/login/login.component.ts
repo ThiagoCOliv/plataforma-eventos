@@ -44,10 +44,9 @@ export class LoginComponent implements OnDestroy{
     if(this.loginForm.valid) 
     {
       this.httpSubscription = this.service.loginUser(this.loginForm.value).subscribe(res => {
-        console.log(res);
         if(res.status === 200) 
         {
-          localStorage.setItem('username', res.body.name as string);
+          localStorage.setItem('username', res.body.user.name as string);
           localStorage.setItem('jwt_token', res.body.token as string);
           this.loginForm.reset();
           this.loginSuccess.emit();
@@ -57,7 +56,6 @@ export class LoginComponent implements OnDestroy{
           alert("Erro ao fazer login. Verifique suas credenciais.");
         }
       });
-      this.close();
     } 
     else 
     {

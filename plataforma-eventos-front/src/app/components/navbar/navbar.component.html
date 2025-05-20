@@ -9,7 +9,13 @@
     </div>
     @if (userIsLogged)
     {
-        <button>{{ username }}</button>
+        <div class="user-logged-menu">
+            <button class="user-logged-btn" (click)="userMenuToggle()">{{ username }}</button>
+            <ul class="user-menu-dropdown" [class]="userMenuOpen">
+                <li><a href="">Ver Perfil</a></li>
+                <li><button (click)="logout()">Logout</button></li>
+            </ul>
+        </div>
     }
     @else 
     {
