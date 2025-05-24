@@ -17,7 +17,9 @@ const createUser = async (req, res) => {
                 details: canCreateUser.errors
             });
         
-        if (!await sendValidtionNumber(userData)) throw new Error('Failed to send email');
+        delete userData.confirmPassword;
+
+        if (!await sendValidationNumber(userData)) throw new Error('Failed to send email');
 
         const user = await UserService.createUser(userData);
         
@@ -82,8 +84,8 @@ const loginUser = async (req, res) => {
     catch (error) 
     {
         console.log(error);
-        if (error.message === 'Invalid email or password') return res.status(401).json({ error: error.message });
-        return res.status(500).json({ error: 'Internal Server Error' });
+        return error.message === 'Invalid email or password' ? 
+            res.status(401).json({ error: 'Login Unauthorized' }) : res.status(500).json({ error: error.message || 'Internal Server Error' });
     }
 }
 
@@ -95,7 +97,7 @@ const getValidationNumber = async (req, res) => {
         if (!user) throw new Error('User not found');
         if (user.status === 'active') throw new Error('Account already validated');
         
-        if (!await sendValidtionNumber(user)) throw new Error('Failed to send email');
+        if (!await sendValidationNumber(user)) throw new Error('Failed to send email');
         
         return res.status(200).json({ message: 'Validation number sent successfully' });
     } 
@@ -106,7 +108,7 @@ const getValidationNumber = async (req, res) => {
     }
 }
 
-async function sendValidtionNumber(user)
+async function sendValidationNumber(user)
 {
     let validationNumber = cache.getCache(user.email);
     if (validationNumber) cache.delCache(user.email);

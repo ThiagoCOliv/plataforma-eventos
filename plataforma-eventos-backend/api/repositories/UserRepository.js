@@ -4,11 +4,7 @@ class UserRepository
 {
     async create(userData)
     {
-        return await UserModel.create({
-            name: userData.name,
-            email: userData.email,
-            password: userData.password
-        });
+        return await UserModel.create(userData);
     }
 
     async checkUser(email)

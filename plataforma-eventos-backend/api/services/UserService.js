@@ -31,6 +31,7 @@ async function validateAccount(id, number)
 
         const userValidated = await userRepository.validateAccount(userCheck.email);
         if (!userValidated) throw new Error('Failed to validate account');
+        cache.delCache(userCheck.email);
         
         return true;
     }
