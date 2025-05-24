@@ -1,10 +1,7 @@
 const joi = require('joi');
 const checkValidationResult = require('../../utils/checkValidationResult');
 
-const validateCreate = (userData) => checkValidationResult(validateUserData(userData));
-const validateAccount = (id, number) => checkValidationResult(validateInfo(id, number));
-
-const validateUserData = (userData) => {
+const validateCreate = (userData) => {
     const schema = joi.object({
         name: joi.string().min(3).max(50).required(),
         email: joi.string().email().required(),
@@ -12,16 +9,16 @@ const validateUserData = (userData) => {
         confirmPassword: joi.string().valid(joi.ref('password')).required()
     });
 
-    return schema.validate(userData, { abortEarly: false });
+    return checkValidationResult(schema.validate(userData, { abortEarly: false }));
 }
 
-const validateInfo = (id, number) => {
+const validateAccount = (id, number) => {
     const schema = joi.object({
         id: joi.string().uuid().required(),
         number: joi.string().length(8).pattern(/^[0-9]+$/).required()
     });
 
-    return schema.validate({ id, number: number.toString() }, { abortEarly: false });
+    return checkValidationResult(schema.validate({ id, number: number.toString() }, { abortEarly: false }));
 }
 
 const validateUserLogin = (userData) => {

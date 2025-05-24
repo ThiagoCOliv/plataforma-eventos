@@ -1,9 +1,7 @@
 const joi = require('joi');
 const checkValidationResult = require('../../utils/checkValidationResult');
 
-const validateEvent = (eventInfo) => checkValidationResult(validateEventData(eventInfo));
-
-const validateEventData = (eventInfo) => {
+const validateEvent = (eventInfo) => {
     const schema = joi.object({
         title: joi.string().min(3).max(100).required(),
         description: joi.string().min(10).max(500).required(),
@@ -15,12 +13,10 @@ const validateEventData = (eventInfo) => {
         image: joi.string().uri()
     });
 
-    return schema.validate(eventInfo, { abortEarly: false });
+    return checkValidationResult(schema.validate(eventInfo, { abortEarly: false }));
 }
 
-const validateSubscription = (subscriptionInfo) => checkValidationResult(validateSubscriptionData(subscriptionInfo));
-
-const validateSubscriptionData = (subscriptionInfo) => {
+const validateSubscription = (subscriptionInfo) => {
     const schema = joi.object({
         eventId: joi.string().uuid().required(),
         companionsNumber: joi.number().integer().min(0).max(5).required(),
@@ -28,7 +24,7 @@ const validateSubscriptionData = (subscriptionInfo) => {
         email: joi.string().email().required()
     });
 
-    return schema.validate(subscriptionInfo, { abortEarly: false });
+    return checkValidationResult(schema.validate(subscriptionInfo, { abortEarly: false }));
 }
 
 module.exports = {
