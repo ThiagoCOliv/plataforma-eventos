@@ -30,9 +30,7 @@ const verifyToken = (token) => {
     return decodedPayload;
 }
 
-const generateSignature = (header, payload) => {
-    return Buffer.from(crypto.createHmac('sha256', jwt.secret).update(header + "." + payload).digest('base64')).toString('base64');
-}
+const generateSignature = (header, payload) => Buffer.from(crypto.createHmac('sha256', jwt.secret).update(header + "." + payload).digest('base64')).toString('base64');
 
 module.exports = {
     generateToken,
